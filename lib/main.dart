@@ -17,7 +17,20 @@ class MyApp extends StatefulWidget{
 }
 class MyAppState extends State<MyApp>{
   var index=0;
-  var data=['first question one ','second question one','third component'];
+  var questions=[
+    {
+       'question':'What is your name',
+       'answers':['alok','avinash','sidhant']
+   },
+  {
+       'question':'What is your pet name',
+       'answers':['dog','cat','cow']
+   },
+   {
+       'question':'What is your nick name',
+       'answers':['gg','golu','ss']
+   },
+  ];
   buttonPressed(){
     setState(() {
        index=index+1;
@@ -33,9 +46,12 @@ class MyAppState extends State<MyApp>{
       ),
       body:Column(
         children: [
-          Question(data[index]),
-         Answer(buttonPressed),
-          Answer(buttonPressed)
+          Question(questions[index]['question']),
+         ...(questions[index]['answers'] as List<String>).map((answer){
+           return Answer(buttonPressed,answer);
+         }).toList()
+
+         
         ],
       ),
     ),);  
