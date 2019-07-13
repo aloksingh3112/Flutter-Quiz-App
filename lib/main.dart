@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 
 import './quiz.dart';
+import './result.dart';
 
 void main(){
   runApp(MyApp());
@@ -16,23 +17,32 @@ class MyApp extends StatefulWidget{
 }
 class MyAppState extends State<MyApp>{
   var index=0;
+  var _result=0;
   var questions=[
     {
        'question':'What is your name',
-       'answers':['alok','avinash','sidhant']
+       'answers':[
+         {'text':'alok','score':10}
+         ,{'text':'avinash','score':6}
+         ,{'text':'sidhant','score':7}]
    },
   {
        'question':'What is your pet name',
-       'answers':['dog','cat','cow']
+       'answers':[{'text':'dog','score':10}
+         ,{'text':'cat','score':4}
+         ,{'text':'rat','score':7}]
    },
    {
        'question':'What is your nick name',
-       'answers':['gg','golu','ss']
+       'answers':[{'text':'gg','score':8}
+         ,{'text':'hh','score':6}
+         ,{'text':'ss','score':2}]
    },
   ];
-  buttonPressed(){
+  buttonPressed(int score){
     setState(() {
        index=index+1;
+       _result+=score;
     });
    
   }
@@ -43,9 +53,8 @@ class MyAppState extends State<MyApp>{
       appBar:AppBar(
         title: Text('My first App'),
       ),
-      body:index<questions.length?Quiz(buttonPressed,questions,index):Center(
-        child: Text('You did it'),
-      ),
+      body:index<questions.length?Quiz(buttonPressed,questions,index):
+     Result(_result)
     ),);  
     }
 }
