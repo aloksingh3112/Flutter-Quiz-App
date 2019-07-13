@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
 
 void main(){
   runApp(MyApp());
@@ -44,16 +43,7 @@ class MyAppState extends State<MyApp>{
       appBar:AppBar(
         title: Text('My first App'),
       ),
-      body:index<questions.length?Column(
-        children: [
-          Question(questions[index]['question']),
-         ...(questions[index]['answers'] as List<String>).map((answer){
-           return Answer(buttonPressed,answer);
-         }).toList()
-
-         
-        ],
-      ):Center(
+      body:index<questions.length?Quiz(buttonPressed,questions,index):Center(
         child: Text('You did it'),
       ),
     ),);  
